@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Memories</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            background: linear-gradient(to bottom, #f8c8d8, #ffd1dc);
+            color: white;
+            transition: background 1s ease-in-out;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .message-box {
+            background: #fde5ed;
+            color: black;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 1.8rem;
+            text-align: center;
+            position: absolute;
+            top: 8%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 80%;
+        }
+
+        /* Image Slider */
+        .image-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        .slider {
+            display: flex;
+            width: calc(100% * 22); /* Automatically adjusts for 22 images */
+            animation: slideLeft 30s linear infinite;
+        }        
+
+        .slider img {
+            max-width: 69%; /* Adjust to your preferred size */
+            max-height: 68vh; /* Adjust to fit the viewport height */
+            object-fit: contain; /* Keep the aspect ratio */
+        }
+
+        @keyframes slideLeft {
+            0% { transform: translateX(0vw); }  /* Start from right */
+            90% { transform: translateX(-370vw); }  /* Move fully left */
+        }
+
+        /* Floating Hearts & Cakes (Behind Images) */
+        .floating-effect {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: floatUp 4s ease-in-out forwards;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 1; /* Behind images */
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.8); opacity: 0; }
+            20% { opacity: 1; }
+            50% { transform: translateY(-50vh) scale(1.2); opacity: 0.8; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        }
+
+        /* Touch Effect (Tap to show hearts/cakes, Behind Images) */
+        .touch-effect {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: pop 0.5s ease-out;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.5); opacity: 1; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+
+        /* Popup */
+        .popup {
+            position: absolute;
+            bottom: 1%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fde5ed;
+            color: black;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-size: 1.5rem;
+            z-index: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #e91e63;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-box">AT LAST WE WERE WORKING ON MUSIC PRACTICAL FILE TOGETHER😚☺️</div>
+    
+    <!-- Floating Hearts & Cakes (Behind Images) -->
+    <script>
+        function createFloatingEffect() {
+            const symbols = ['❤️', '💖', '💝', '💓', '💗', '😚', '😁'];
+            for (let i = 0; i < 5; i++) {
+                const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+                let effect = document.createElement('div');
+                effect.classList.add('floating-effect');
+                effect.textContent = randomSymbol;
+
+                effect.style.left = Math.random() * 100 + "vw";
+                effect.style.bottom = "-10vh";
+                effect.style.animationDuration = (Math.random() * 3 + 3) + "s"; /* Faster floating */
+                effect.style.fontSize = (Math.random() * 2 + 1) + "rem";
+
+                document.body.appendChild(effect);
+
+                setTimeout(() => {
+                    effect.remove();
+                }, 8000);
+            }
+        }
+
+        function startFloatingHearts() {
+            setInterval(createFloatingEffect, 300);
+        }
+
+        document.addEventListener("DOMContentLoaded", startFloatingHearts);
+    </script>
+
+    <div class="image-container">
+        <div class="slider">
+            <script>
+                for (let i = 1; i <= 22; i++) {
+                    document.write(`<img src="Working/1 (${i}).jpg">`); // Change "folder1" for each page
+                }
+                for (let i = 1; i <= 22; i++) {
+                    document.write(`<img src="Working/1 (${i}).jpg">`); // Repeat for smooth looping
+                }
+            </script>
+        </div>
+    </div>
+
+    <div class="popup">
+        NOW THIS THE LAST PAGE PLEASE CLICK ON CONTINUE LAST TIME💖
+        <button onclick="goToNextPage()">Continue💖</button>
+    </div>
+
+    <script>
+        function goToNextPage() {
+            window.location.href = "page20.html"; // Change to the next page in order
+        }
+
+        // Touch Effect (Tap to show hearts/cakes, Behind Images)
+        document.addEventListener('click', function(event) {
+            const symbols = ['❤️', '😚', '😁', '💖'];
+            const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            let effect = document.createElement('div');
+            effect.classList.add('touch-effect');
+            effect.textContent = randomSymbol;
+            effect.style.left = `${event.clientX}px`;
+            effect.style.top = `${event.clientY}px`;
+            document.body.appendChild(effect);
+            
+            setTimeout(() => {
+                effect.remove();
+            }, 600);
+        });
+    </script>
+    <script src="script/music.js"></script>
+    <body data-song="19.mp3">
+</body>
+</html>
